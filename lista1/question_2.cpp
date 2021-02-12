@@ -22,6 +22,7 @@ bool detected_cycle(int prev, int node){
             if(visited[edge] == 2){
                 start = edge;
                 edge_have_cycle = true;
+		break;
             }
         }
     }

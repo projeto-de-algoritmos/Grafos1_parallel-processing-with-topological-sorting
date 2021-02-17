@@ -13,6 +13,12 @@ Finally, the module have a cache system. For every node the response
 if filled into the cache to don't waste time processing this again.
 This feature implies that all functions need to be stateless/thread-safe.
 
+Another importante issue with that method is recursive functions.
+Seen that we make the function be lazy. A recursive function will
+be represented by just one node. That is not a problem when we are
+talking about recursive lazy calls, but if we start a topological sorting
+algorithm without know all nodes that makes the graph this maybe will create a issue.
+
 The idea of the module is construct a DAG graph that will be used into the topological
 sorting algorithm to process some tasks in a processing pool.
 """

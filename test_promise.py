@@ -1,9 +1,9 @@
 import logging
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 
-from top_processing import Evaluate, lazy, count_graph, relational_graph
+from top_processing import lazy, count_graph, relational_graph
 
 @lazy
 def mergesort(values, l, r):

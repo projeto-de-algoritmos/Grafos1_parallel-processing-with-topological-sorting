@@ -1,6 +1,6 @@
 import logging
 
-logging = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 count_graph = {}
 relational_graph = {}

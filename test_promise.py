@@ -1,40 +1,9 @@
-class Evaluate:
+import logging
 
-    def __init__(self, function, *args, **kwargs):
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
-        self.function = function
-        self.args = args
-        self.kwargs = kwargs
-
-    def __call__(self):
-
-        def try_evaluate(obj):
-
-            if isinstance(obj, Evaluate):
-
-                return obj()
-
-            return obj
-
-        method = self.function
-
-        self.args = tuple(map(try_evaluate, self.args))
-
-        #TODO(felipe) create kwargs evaluation
-
-        response = method(*self.args, **self.kwargs)
-
-        return try_evaluate(response)
-
-def lazy(function):
-
-    def decorated(*args, **kwargs):
-
-        value = Evaluate(function, *args, **kwargs)
-
-        return value
-
-    return decorated
+from top_processing import Evaluate, lazy, count_graph, relational_graph
 
 @lazy
 def mergesort(values, l, r):
@@ -82,8 +51,15 @@ def merge(arr: list, l: int, mid: int, r: int):
         l2+=1
         p+=1
 
+@lazy
+def add(value1, value2):
+    return value1 + value2
+
+@lazy
+def mult(value1, value2):
+    return value1 * value2
+
 if __name__ == '__main__':
 
-    sorted_values = mergesort([1,5,7, 2,4], 0, 4)
+    print(add(add(5, 4), mult(10, 4)))
 
-    print(sorted_values())

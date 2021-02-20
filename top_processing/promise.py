@@ -34,6 +34,9 @@ count_graph = {}
 # Relantional graph: just a normal graph that uses python object id
 relational_graph = {}
 
+# Just a map id : object
+graph = {}
+
 # Save the response of some nodes and is used in consective calls
 cache = {}
 
@@ -42,6 +45,7 @@ class Evaluate:
     This class makes the function add lazyness to the functions
     Every evaluated response is saved into cache to be used again
     """
+
 
     def __init__(self, function, *args, **kwargs):
 
@@ -106,6 +110,8 @@ def lazy(function):
 
         # create a node
         value = Evaluate(function, *args, **kwargs)
+
+        graph[id(value)] = value
 
         # Add references in each graph
         count_graph[id(value)] = 0

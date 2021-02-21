@@ -22,6 +22,16 @@ def delay(function: Callable, seconds:int = 1):
 
 @lazy
 @delay
+def sub(x: int, y: int):
+    return x - y
+
+@lazy
+@delay
+def div(x: int, y: int):
+    return x // y
+
+@lazy
+@delay
 def add(x: int, y: int):
     return x  + y
 
@@ -40,18 +50,7 @@ def create_expression():
     Create the expression here
     """
 
-    #define expression
-    arg1: Evaluate = attr_val(5)
-    arg2: Evaluate = attr_val(4)
-
-    add_1: Evaluate = add(arg1, arg2)
-
-    arg3: Evaluate = attr_val(10)
-    arg4: Evaluate = attr_val(4)
-
-    mult_1: Evaluate = mult(arg3, arg4)
-
-    expression: Evaluate = add(add_1, mult_1)
+    expression = mult(add(sub(attr_val(3),add(attr_val(12),attr_val(14))),attr_val(5)),div(add(attr_val(1),attr_val(1)),attr_val(3)))
 
     return expression
 
@@ -67,7 +66,9 @@ def clear_graphs():
 if __name__ == '__main__':
  
     # SEQUENCIAL EXECUTION
-    print("Execution the expression sequentially")
+    print("Simulating expressions execution")
+    print("1 second = 1 cpu cycle\n")
+    print("Executing the expression sequentially")
     start = time.time()
 
     expression = create_expression()
@@ -83,7 +84,7 @@ if __name__ == '__main__':
     expression = create_expression()
 
     # PARALLEL EXECUTION
-    print("Execution the expression in parallel")
+    print("\nExecuting the expression in parallel (unlimited CPUS)")
 
     start = time.time()
 
@@ -96,9 +97,15 @@ if __name__ == '__main__':
 
     # Number of CPUs to be used in cicles measurement
     CPUS = 4
-    cicles = count_cycles(t_sort, relational_graph.copy(), CPUS)
+    cicles = count_cycles(t_sort.copy(), relational_graph.copy(), CPUS)
 
-    print(f"Number of cicles: {cicles}")
     print(f"Result of expression: {response}")
     print(f"Time of execution: {end - start:.2f}s")
 
+    print("\nCycles counting for fixed number of cores:")
+    print(f"It takes {count_cycles(t_sort.copy(), relational_graph.copy(), 2)} cycles to execute the expression using 2 CPUS")
+    print(f"It takes {count_cycles(t_sort.copy(), relational_graph.copy(), 3)} cycles to execute the expression using 3 CPUS")
+    print(f"It takes {count_cycles(t_sort.copy(), relational_graph.copy(), 4)} cycles to execute the expression using 4 CPUS")
+    print(f"It takes {count_cycles(t_sort.copy(), relational_graph.copy(), 5)} cycles to execute the expression using 5 CPUS")
+    print(f"It takes {count_cycles(t_sort.copy(), relational_graph.copy(), 10)} cycles to execute the expression using 10 CPUS")
+    print(f"It takes {count_cycles(t_sort.copy(), relational_graph.copy(), 50)} cycles to execute the expression using 50 CPUS")

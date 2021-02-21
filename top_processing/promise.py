@@ -40,6 +40,9 @@ graph = {}
 # Save the response of some nodes and is used in consective calls
 cache = {}
 
+
+graph = {}
+
 class Evaluate:
     """
     This class makes the function add lazyness to the functions
@@ -110,6 +113,8 @@ def lazy(function):
 
         # create a node
         value = Evaluate(function, *args, **kwargs)
+        
+        graph[id(value)] = value
 
         graph[id(value)] = value
 

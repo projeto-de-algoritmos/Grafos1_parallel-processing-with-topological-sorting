@@ -35,8 +35,10 @@ def mult(x: int, y: int):
 def attr_val(x: int):
     return x
 
-
 def create_expression():
+    """
+    Create the expression here
+    """
 
     #define expression
     arg1: Evaluate = attr_val(5)
@@ -54,6 +56,9 @@ def create_expression():
     return expression
 
 def clear_graphs():
+    """
+    Clear cache and other objects
+    """
 
     graph = {}
     relational_graph = {}
@@ -92,7 +97,6 @@ if __name__ == '__main__':
     # Number of CPUs to be used in cicles measurement
     CPUS = 4
     cicles = count_cycles(t_sort, relational_graph.copy(), CPUS)
-
 
     print(f"Number of cicles: {cicles}")
     print(f"Result of expression: {response}")

@@ -32,7 +32,9 @@ def attr_val(x):
     return x
 
 def dummy_topological_sorting(r_graph, c_graph, g):
-
+    '''
+    This function generates a list which represents the topological sort of operations graph from left to right
+    '''
     top_sort = []
 
     q = deque()
@@ -57,61 +59,11 @@ def dummy_topological_sorting(r_graph, c_graph, g):
 
     return top_sort
 
-# def count_cycles(topological_sort: list, graph: dict, available_cores: int):
-#     operation_status = {}
-#     PENDING = 1
-#     PERFORMED = 0
-
-#     for operation in topological_sort:
-#         operation_status[operation] = PENDING
-
-#     print("operation status:", operation_status)
-
-#     cycles = 1
-
-#     print('Graph:', graph)
-    
-#     curr_perfoming_operations = []
-#     curr_available_cores = available_cores
-#     operations = deque(topological_sort)
-
-#     print('Deque:', operations)
-
-#     while len(operations) > 0:
-#         # If there is no cores left
-#         if curr_available_cores < 1:
-#             curr_available_cores = available_cores
-#             cycles += 1
-
-#             # Sign every operation performed in this cycle
-#             for operation in curr_perfoming_operations:
-#                 operation_status[operation] = PERFORMED
-#             curr_perfoming_operations = []
-        
-#         curr_operation = operations[0]
-
-#         # Check if current operation has dependencies being performed at the same cycle
-#         continue_to_next_cycle = False
-#         for operation in graph[curr_operation]:
-#             print('Checking', operation)
-#             sleep(1)
-#             # If there is such dependency, insert bubbles inside each core left
-#             if operation_status[operation] == PENDING:
-#                 curr_available_cores = 0
-#                 continue_to_next_cycle = True
-#                 break
-
-#         if continue_to_next_cycle == True:
-#             print('Continuei pro proximo')
-#             continue
-
-#         operations.popleft()
-#         curr_perfoming_operations.append(curr_operation)
-#         curr_available_cores -= 1
-
-#     return cycles
-
 def count_cycles(topological_sort: list, graph: dict, available_cores: int):
+    '''
+    This function greedily Walk through topological_sort list counting how many CPU cycles are needed to perform all operations
+    The answer may vary according to available_cores
+    '''
     dependencies_count = {}
 
     for node in topological_sort:
@@ -120,10 +72,6 @@ def count_cycles(topological_sort: list, graph: dict, available_cores: int):
     for node in topological_sort:
         for operation in graph[node]:
             dependencies_count[operation] += 1
-
-    # print('Topological sort:', topological_sort)
-    # print('Graph:', graph)
-    # print('Dependencies:', dependencies_count)
 
     cores_left = available_cores
     cycles_total = 1

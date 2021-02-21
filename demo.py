@@ -60,9 +60,9 @@ def clear_graphs():
     Clear cache and other objects
     """
 
-    graph = {}
-    relational_graph = {}
-    count_graph = {}
+    graph.clear()
+    count_graph.clear()
+    relational_graph.clear()
 
 if __name__ == '__main__':
  

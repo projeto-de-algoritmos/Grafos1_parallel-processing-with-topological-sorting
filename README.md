@@ -58,5 +58,5 @@ Após isso, você verá na tela quantos ciclos essa expressão leva para ser exe
 
 ## Video expositivo
 
-Você pode assistir um vídeo explicativo [aqui](https://www.youtube.com/embed/XAWLqq7dnNc)!
+Você pode assistir um vídeo explicativo [aqui](https://www.youtube.com/embed/XAWLqq7dnNc), ou baixá-lo [aqui](docs/video.mp4).
 

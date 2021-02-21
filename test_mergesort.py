@@ -1,8 +1,3 @@
-import logging
-
-logger = logging.getLogger(__name__)
-#logging.basicConfig(level=logging.DEBUG)
-
 from top_processing import lazy, count_graph, relational_graph
 
 @lazy
@@ -11,9 +6,9 @@ def mergesort(values, l, r):
     if(l<r):
         mid = (l+r)//2
 
-        mergesort(values, l, mid)
-        mergesort(values, mid+1, r)
-        merge(values, l, mid, r)
+        mergesort(values, l, mid)()
+        mergesort(values, mid+1, r)()
+        merge(values, l, mid, r)()
 
     return values
 
@@ -51,15 +46,7 @@ def merge(arr: list, l: int, mid: int, r: int):
         l2+=1
         p+=1
 
-@lazy
-def add(value1, value2):
-    return value1 + value2
-
-@lazy
-def mult(value1, value2):
-    return value1 * value2
-
 if __name__ == '__main__':
 
-    print(add(add(5, 4), mult(10, 4))())
-
+    values = mergesort([5, 4, 3, 1, 2], 0, 4)
+    print(values())

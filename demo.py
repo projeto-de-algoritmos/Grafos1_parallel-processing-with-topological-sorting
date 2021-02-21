@@ -3,6 +3,7 @@ from collections.abc import Callable
 from top_processing import lazy, relational_graph, count_graph, graph, Evaluate
 from top_processing.parallel import process
 from top_processing.topological import topological_sorting
+from top_processing import count_cycles
 
 def delay(function: Callable, seconds:int = 1):
     """
@@ -59,7 +60,7 @@ def clear_graphs():
     count_graph = {}
 
 if __name__ == '__main__':
-
+ 
     # SEQUENCIAL EXECUTION
     print("Execution the expression sequentially")
     start = time.time()
@@ -88,6 +89,12 @@ if __name__ == '__main__':
 
     end = time.time()
 
+    # Number of CPUs to be used in cicles measurement
+    CPUS = 4
+    cicles = count_cycles(t_sort, relational_graph.copy(), CPUS)
+
+
+    print(f"Number of cicles: {cicles}")
     print(f"Result of expression: {response}")
     print(f"Time of execution: {end - start:.2f}s")
 
